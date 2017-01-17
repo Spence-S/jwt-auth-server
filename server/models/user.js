@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
 import { ObjectId } from 'mongo-db';
+import bcrypt from 'bcrypt-nodejs';
 
+//User schema
 const UserSchema = new Schema({
   userName:{
     type: String,
@@ -21,4 +23,18 @@ const UserSchema = new Schema({
     type: String,
     enum: ['admin','user']
   },
+  facebook: String
+});
+
+//Save hashed passwords only
+userSchema.pre('save', function(next) {
+  const user = this;
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) { return next(err); }
+    bcrypt.hash(user.password, salt, (err, hash) => {
+      if (err) { return next(err); }
+      user.password = hash;
+      next();
+    });
+  });
 });

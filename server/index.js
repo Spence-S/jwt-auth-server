@@ -2,9 +2,12 @@ import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 const port = 8080;
 const app = express();
+
+mongoose.connect('mongodb://localhost:27017/authDB')
 
 app.use(cors());
 app.use(morgan('dev'));

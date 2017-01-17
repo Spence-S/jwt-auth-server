@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "babel server -d build",
-    "dev": "nodemon server/index.js --exec babel-node  --presets es2015,stage-0"
+    "dev": "nodemon server/index.js --exec babel-node --presets es2015,stage-0"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "express": "^4.14.0",
