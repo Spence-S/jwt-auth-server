@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import router from './routes/routes';
 
 const port = 8080;
 const app = express();
@@ -12,23 +13,16 @@ mongoose.connect('mongodb://localhost:27017/authDB')
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use('/', router);
 
-
-
-app.get('/', (req, res) => {
-  res.send('Hello there you fucking cock sucker!');
-});
-
-/*********************
-catch 404 errors
-**********************/
+// Catch 404s
 app.use((req, res, next) => {
   let err = new Error('NOPE! 404 bitch: Resources Not Found');
   err.status = 404;
   next(err);
 });
 
-//set up error handler
+//Error handler
 app.use((err, req, res, next) => {
   res.status( err.status || 500);
     res.send({
@@ -37,7 +31,7 @@ app.use((err, req, res, next) => {
     });
 });
 
-//start running app
+//start up the app!
 app.listen(port, ()=>{
   console.log(`App is now listening on port ${port}`);
 });

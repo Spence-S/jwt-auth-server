@@ -38,3 +38,10 @@ userSchema.pre('save', function(next) {
     });
   });
 });
+
+//compare passwords on lookup
+userSchema.methods.
+
+const User = mongoose.model( 'User', UserSchema );
+
+export default User;
