@@ -17,7 +17,7 @@ app.use('/', router);
 
 // Catch 404s
 app.use((req, res, next) => {
-  let err = new Error('NOPE! 404 bitch: Resources Not Found');
+  let err = new Error('NOPE! 404: Resources Not Found');
   err.status = 404;
   next(err);
 });
