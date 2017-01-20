@@ -33,5 +33,5 @@ app.use((err, req, res, next) => {
 
 //start up the app!
 app.listen(port, ()=>{
-  console.log(`App is now listening on port ${port}`);
+  console.log(`Auth app is now listening on port ${port}`);
 });

@@ -17,7 +17,10 @@
     "jsonwebtoken": "^7.2.1",
     "mongodb": "^2.2.21",
     "mongoose": "^4.7.7",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
