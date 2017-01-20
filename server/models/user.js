@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import { ObjectId } from 'mongodb';
-import bcrypt from 'bcrypt-nodejs';
+import bcrypt from 'bcryptjs';
 
 //User schema
 const UserSchema = new Schema({
@@ -26,17 +26,20 @@ const UserSchema = new Schema({
   facebook: String
 });
 
-//Save hashed passwords only
-UserSchema.pre('save', function(next) {
-  const user = this;
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) { return next(err); }
-    bcrypt.hash(user.password, salt, (err, hash) => {
-      if (err) { return next(err); }
-      user.password = hash;
-      next();
+//secure the password with pre-save middleware
+UserSchema.pre('save', function(next){
+  let user = this;
+  if(user.isModified('password')){
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            // Store hash in your password DB.
+            user.password = hash;
+            next();
+        });
     });
-  });
+  }else{
+    next();
+  }
 });
 
 //compare passwords on lookup

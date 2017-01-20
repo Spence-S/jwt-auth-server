@@ -1,9 +1,12 @@
 import express from 'express';
 import morgan from 'morgan';
+import path from 'path';
 import { json } from 'body-parser';
 import cors from 'cors';
 import connectMongoose  from './config/db';
 import router from './routes/routes';
+
+
 
 const port = 8080;
 const app = express();
@@ -15,9 +18,16 @@ connectMongoose()
     console.log(error);
   })
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
+
 app.use(cors());
 app.use(morgan('dev'));
 app.use(json());
+app.get('/*', (req, res, next) => {
+  res.setHeader('Last-Modified', (new Date()).toUTCString());
+  next();
+});
 app.use('/', router);
 
 // Catch 404s
