@@ -1,6 +1,6 @@
 import passport from 'passport';
 import localStrategy from 'passport-local';
-import User from '../models/user';
+import { User } from '../models';
 
 // Create local strategy
 const localOptions = { usernameField: 'email' };
@@ -10,7 +10,6 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
   // otherwise, call done with false
   User.findOne({ email: email })
     .then( user =>{
-      if (err) { return done(err); }
       if (!user) { return done(null, false); }
       // compare passwords - is `password` equal to user.password?
       user.comparePassword(password, function(err, isMatch) {
@@ -21,5 +20,5 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
       });
     })
     .catch( err => {
-      if (err) { return done(err); }
+        return done(err);
     });

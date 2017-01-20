@@ -1,5 +1,18 @@
+import { User } from '../models';
+
 const signup = (req, res, next) => {
-  res.json({"mesage": "this message is coming from the signup controller"});
+
+  let user = new User(req.body);
+
+  user.save()
+    .then( doc => {
+      res.json({doc});
+    })
+    .catch( err => {
+      return next(err);
+    });
+
+
 };
 
 export default signup;

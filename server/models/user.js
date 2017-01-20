@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { ObjectId } from 'mongo-db';
+import { ObjectId } from 'mongodb';
 import bcrypt from 'bcrypt-nodejs';
 
 //User schema
