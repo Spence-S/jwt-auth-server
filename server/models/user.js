@@ -42,13 +42,19 @@ UserSchema.pre('save', function(next){
   }
 });
 
-//compare passwords on lookup
-UserSchema.methods.comparePassword = (candidatePassword, callback) => {
-  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-    if (err) { return callback(err); }
-    callback(null, isMatch);
-  });
-}
+// //compare passwords on lookup
+// UserSchema.methods.comparePassword = (candidatePassword) => {
+//   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+//     if (err) {
+//       return err;
+//     }
+//     if (isMatch) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   });
+// }
 
 const User = mongoose.model( 'User', UserSchema );
 

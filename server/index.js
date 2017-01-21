@@ -1,10 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
-import { json } from 'body-parser';
+import { json, urlencoded } from 'body-parser';
 import cors from 'cors';
 import connectMongoose  from './config/db';
 import router from './routes/routes';
+import passport from 'passport';
 
 
 
@@ -24,6 +25,7 @@ app.set('view engine', 'pug');
 app.use(cors());
 app.use(morgan('dev'));
 app.use(json());
+app.use(urlencoded());
 app.get('/*', (req, res, next) => {
   res.setHeader('Last-Modified', (new Date()).toUTCString());
   next();

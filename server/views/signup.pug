@@ -6,16 +6,16 @@ block content
        div(class="col-sm-2")
        div(class="col-sm-8")
          h1(class="center-block") Signup
-         form
+         form(action="signup" method="POST" )
            div(class="form-group")
              label(for="email") Name:
-             input(class="form-control")
+             input(class="form-control" name="name")
            div(class="form-group")
              label(for="email") Email:
-             input(class="form-control")
+             input(class="form-control" name="email")
            div(class="form-group")
              label(form="password") Password:
-             input(class="form-control")
+             input(class="form-control" name="password")
            div(class="form-group")
              label(form="password") Confirm Password:
              input(class="form-control")
